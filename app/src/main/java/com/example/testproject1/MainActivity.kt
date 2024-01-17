@@ -3,6 +3,7 @@ package com.example.testproject1
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.commit
 import com.example.testproject1.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -13,7 +14,13 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val intent = Intent(this, ClipboardActivity::class.java)
-        startActivity(intent)
+        supportFragmentManager.commit {
+            replace(binding.flMain.id, ClipboardFragment())
+            setReorderingAllowed(true)
+            addToBackStack("")
+        }
+
+//        val intent = Intent(this, ClipboardActivity::class.java)
+//        startActivity(intent)
     }
 }
