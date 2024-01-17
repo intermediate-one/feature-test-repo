@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val intent = Intent(this, MessageActivity::class.java)
+        val intent = Intent(this, GalleryGetImageActivity::class.java)
         startActivity(intent)
     }
 }
