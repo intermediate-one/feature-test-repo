@@ -15,6 +15,7 @@ class ClipboardActivity : AppCompatActivity() {
         binding = ActivityClipboardBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // 프래그먼트면 getSystemService 앞에 requireActivity() 추가.
         binding.btn3.setOnClickListener {
             val clipboard = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
             val clip = ClipData.newPlainText("label", binding.et3.text)
