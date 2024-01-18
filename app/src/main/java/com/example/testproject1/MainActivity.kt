@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
             addToBackStack("")
         }
 
-//        val intent = Intent(this, ClipboardActivity::class.java)
-//        startActivity(intent)
+        val intent = Intent(this, NotificationActivity::class.java)
+        startActivity(intent)
     }
 }
