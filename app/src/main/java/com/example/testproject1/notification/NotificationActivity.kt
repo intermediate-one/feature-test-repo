@@ -116,7 +116,11 @@ class NotificationActivity : AppCompatActivity() {
 //    }
 
     private fun setAlarm(sec: Long = 0) {
-        val intent = Intent(this, MyReceiver::class.java)
+        val intent = Intent(this, MyReceiver::class.java).apply {
+            // 일단 넣어봤다.
+            putExtra("title", "알림 제목")
+            putExtra("text", "리시버 인텐트 내용")
+        }
         val pendingIntent = PendingIntent.getBroadcast(
             this, 0, intent,
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
@@ -126,5 +130,21 @@ class NotificationActivity : AppCompatActivity() {
             it[AlarmManager.RTC, System.currentTimeMillis() + sec * 1000] = pendingIntent
         }
             ?: Log.e("myTag", "알람 매니저 null")
+
+        val intent2 = Intent(this, MainActivity::class.java)
+        val pendingIntent2 = PendingIntent.getActivity(
+            this, 101, intent2,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+        val builder = NotificationCompat.Builder(this, MyManagers.channelId).apply {
+            setSmallIcon(R.mipmap.ic_launcher)
+            setWhen(System.currentTimeMillis())  // 이건 언제 보일지가 아니라 이 알림이 언제 알림인지 정보임
+            setContentTitle("알림 타이틀")
+            setContentText("저장한 노티. 꺼내와봅시다.")
+            setContentIntent(pendingIntent2)
+            setAutoCancel(true)
+//            addAction(R.mipmap.ic_launcher, "Action", pendingIntent)
+        }
+        MyReceiver.savedNotification = builder.build()
     }
 }
