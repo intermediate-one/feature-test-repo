@@ -25,7 +25,7 @@ class NotificationActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // 앱의 맨 처음에 실행해주는 것이 좋을 듯
-        MyManagers.init(this)
+        MyManagers.init(applicationContext)
 
         binding.btnNoti1.setOnClickListener {
             notification()
